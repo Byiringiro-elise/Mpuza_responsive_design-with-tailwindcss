@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mpuza - Professional Networking Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar styles */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+        /* Custom gradients */
+        .header-gradient {
+            background: linear-gradient(to right, #e74c3c, #c0392b);
+        }
+        .profile-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .btn-gradient {
+            background: #2f80ed;
+        }
+        .featured-gradient {
+            background: linear-gradient(to right, #56ccf2, #2f80ed);
+        }
+        .company-red {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-300 overflow-x-hidden">
+    <!-- Header -->
+    <div class="header-gradient text-white py-2 sm:py-2.5 px-3 sm:px-5 flex items-center justify-between fixed top-0 left-0 right-0 z-50 shadow-md">
+        <div class="flex items-center gap-2 sm:gap-8">
+            <div class="text-xl sm:text-2xl font-bold">Mpuza</div>
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex gap-3 xl:gap-5 items-center">
+                <div class="relative cursor-pointer px-2 py-1.5 hover:bg-red-600 text-sm">
+                    <i class="fas fa-users"></i> <span class="hidden xl:inline">My Network</span>
+                    <span class="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full px-1.5 py-0.5 text-xs">10</span>
+                </div>
+                <div class="relative cursor-pointer px-2 py-1.5 text-sm hover:bg-red-600">
+                    <i class="fas fa-book"></i> <span class="hidden xl:inline">Courses</span>
+                    <span class="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full px-1.5 py-0.5 text-xs">5</span>
+                </div>
+                <div class="relative cursor-pointer px-2 py-1.5 text-sm hover:bg-red-600">
+                    <i class="fas fa-bell"></i> <a href="#"><span class="hidden xl:inline">Notifications</span></a>
+                    <span class="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full px-1.5 py-0.5 text-xs">8</span>
+                </div>
+                <div class="relative cursor-pointer px-2 py-1.5 text-sm hover:bg-red-600">
+                    <i class="fas fa-briefcase"></i> <span class="hidden xl:inline">Job Alerts</span>
+                    <span class="absolute -top-1 -right-1 bg-blue-500 text-white rounded-full px-1.5 py-0.5 text-xs">3</span>
+                </div>
+            </div>
+        </div>
+        <!-- Search bar -->
+        <div class="hidden md:flex flex-1 max-w-md mx-2 lg:mx-5">
+            <input type="text" placeholder="🔍 Search..." class="w-full py-1.5 sm:py-2 px-3 sm:px-4 rounded-md text-gray-800 text-sm">
+        </div>
+        <div class="flex items-center gap-2 sm:gap-4">
+            <!-- Mobile menu toggle -->
+            <button class="lg:hidden text-white text-xl" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Desktop actions -->
+            <div class="hidden sm:flex items-center gap-1 cursor-pointer text-sm">
+                <i class="fas fa-user-circle"></i><span class="hidden md:inline">Me</span>
+                <select name="" id="" class="text-center w-4 text-blue-500 rounded">
+                            <option value="US$ 99.99">Manage Account</option>
+                            <option value="US$ 99.99">Switch to</option>
+                            <option value="US$ 99.99">Log out</option>
+                        </select>
+            </div>
+            <button class="hidden md:block bg-white text-red-600 px-3 lg:px-4 py-1.5 lg:py-2 rounded-md font-bold cursor-pointer text-xs lg:text-sm whitespace-nowrap">Become Refresher</button>
+            <div class="hidden lg:block bg-white bg-opacity-20 px-2.5 py-1 rounded cursor-pointer text-sm whitespace-nowrap">
+                <i class="fas fa-th"></i>                  
+                 <select name="" id="" class="text-blue-500 rounded">
+                    <option value="">Switch to</option>
+                    <option value="">Switch Account</option>
+                    <option value="">Switch to</option>
+                 </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-black bg-opacity-50 z-40" onclick="toggleMobileMenu()">
+        <div class="bg-white w-64 h-full p-5 overflow-y-auto" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-5">
+                <h3 class="font-bold text-lg">Menu</h3>
+                <button onclick="toggleMobileMenu()" class="text-2xl">&times;</button>
+            </div>
+            <!-- Mobile Search -->
+            <div class="mb-4 md:hidden">
+                <input type="text" placeholder="🔍 Search..." class="w-full py-2 px-3 rounded-md border border-gray-300 text-sm">
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <span><i class="fas fa-users mr-2"></i> My Network</span>
+                    <span class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">10</span>
+                </div>
+                <div class="flex items-center justify-between p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <span><i class="fas fa-book mr-2"></i> Courses</span>
+                    <span class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">5</span>
+                </div>
+                <div class="flex items-center justify-between p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <span><i class="fas fa-bell mr-2"></i> Notifications</span>
+                    <span class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">8</span>
+                </div>
+                <div class="flex items-center justify-between p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <span><i class="fas fa-briefcase mr-2"></i> Job Alerts</span>
+                    <span class="bg-blue-500 text-white rounded-full px-2 py-0.5 text-xs">3</span>
+                </div>
+                <div class="p-2 hover:bg-gray-100 rounded cursor-pointer">
+                    <i class="fas fa-user-circle mr-2"></i> My Profile
+                </div>
+                <button class="w-full bg-red-600 text-white py-2 rounded-full font-bold text-sm">Become Refresher</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="flex flex-col lg:flex-row max-w-screen-2xl mx-auto gap-3 sm:gap-5 px-3 sm:px-5 mt-14 sm:mt-16 pb-5 lg:pb-0" style="min-height: calc(100vh - 64px);">
+        <!-- Left Sidebar -->
+        <aside class="w-full lg:w-64 bg-white rounded-lg overflow-hidden flex-shrink-0 lg:overflow-y-auto lg:h-screen lg:sticky lg:top-16 custom-scrollbar" style="max-height: calc(100vh - 80px);">
+            <div class="bg-[url('https://media.istockphoto.com/id/1356118511/photo/smart-city-and-abstract-dot-point-connect-with-gradient-line.jpg?s=612x612&w=0&k=20&c=GJldTyxDEt0GodKxGONHz9PrN9QcQQAGKONUM0vBvYc=')] bg-cover relative h-20 sm:h-24">
+                <div class="absolute -bottom-8 sm:-bottom-10 left-1/2 transform -translate-x-1/2 w-16 h-16 sm:w-24 sm:h-24 rounded-full border-4 border-white bg-gray-300 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop" alt="Profile" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div class="text-center pt-10 sm:pt-12 pb-4 sm:pb-5 px-4 sm:px-5">
+                <div class="text-base sm:text-lg font-bold mb-2">kalisa Felix</div>
+                <div class="text-xs text-gray-600">Briefly describe who you are</div>
+            </div>
+            <ul class="list-none">
+                <li class="py-2.5 sm:py-3 px-4 sm:px-5 border-t border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition">
+                    <span class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-eye"></i> My profile viewer
+                    </span>
+                    <span class="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-xs">68</span>
+                </li>
+                <li class="py-2.5 sm:py-3 px-4 sm:px-5 border-t border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition">
+                    <span class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-file-alt"></i> Job application
+                    </span>
+                    <span class="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-xs">13</span>
+                </li>
+                <li class="py-2.5 sm:py-3 px-4 sm:px-5 border-t border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition">
+                    <span class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-user-tie"></i> Recruiter interviewed
+                    </span>
+                    <span class="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-xs">0</span>
+                </li>
+                <li class="py-2.5 sm:py-3 px-4 sm:px-5 border-t border-gray-200 flex justify-between items-center cursor-pointer hover:bg-gray-50 transition">
+                    <span class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-star"></i> Saved favourite offers
+                    </span>
+                    <span class="bg-blue-500 text-white px-1.5 sm:px-2 py-0.5 rounded-full text-xs">21</span>
+                </li>
+            </ul>
+            <div class="p-4 sm:p-5 border-t-2 border-gray-200">
+                <div class="font-bold mb-3 sm:mb-4 text-xs sm:text-sm">Company Page info</div>
+                <div class="bg-[url('https://i.pinimg.com/736x/06/ef/51/06ef5161cd23f26a30da48fde04d4206.jpg')] bg-cover w-full h-16 sm:h-20 rounded flex items-end mb-3 sm:mb-4">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmuBO_RZt6zPyl80tUArlsY0H0R5uHGi1Vw&s" alt="Airtel" class=" sm:w-20 h-16 bottom-8">
+                </div>
+                <div class="flex justify-between py-1.5 sm:py-2 text-xs sm:text-sm">
+                    <span><i class="fas fa-chart-line"></i> Page visitors today</span>
+                    <span class="text-blue-500 font-bold">99</span>
+                </div>
+                <div class="flex justify-between py-1.5 sm:py-2 text-xs sm:text-sm">
+                    <span><i class="fas fa-user-plus"></i> Page followers today</span>
+                    <span class="text-blue-500 font-bold">47</span>
+                </div>
+                <div class="flex justify-between py-1.5 sm:py-2 text-xs sm:text-sm">
+                    <span><i class="fas fa-users"></i> Applicants show interests</span>
+                    <span class="text-blue-500 font-bold">11</span>
+                </div>
+                <div class="text-blue-500 cursor-pointer text-xs sm:text-sm flex items-center gap-1 pt-2">
+                    <i class="fas fa-plus"></i> Create company page
+                </div>
+            </div>
+            <div class="p-4 sm:p-5 border-t-2 border-gray-200">
+                <div class="font-bold mb-3 sm:mb-4 text-xs sm:text-sm">Professional Group</div>
+                <div class="text-blue-500 cursor-pointer text-xs sm:text-sm flex items-center gap-1">
+                    <i class="fas fa-users"></i> Create new group
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Content -->
+        <main class="w-full lg:flex-1 lg:max-w-2xl lg:overflow-y-auto lg:h-screen custom-scrollbar lg:pr-2" style="max-height: calc(100vh - 80px);">
+            <div class="flex justify-between bg-white p-5 rounded items-center mb-3 sm:mb-4">
+                    <h2 class="text-base sm:text-lg font-semibold">Home</h2>
+                    <i class="fas fa-thumbtack text-blue-500"></i>
+                </div>
+            <div class="bg-white rounded-lg p-4 sm:p-5 mb-4 sm:mb-5">
+                
+                <div class="flex gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <div class="flex w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-300 flex-shrink-0"> <img src="https://img.freepik.com/free-photo/close-up-portrait-curly-handsome-european-male_176532-8133.jpg?semt=ais_user_personalization&w=740&q=80" class="rounded-full" alt=""></div>
+                    <div class="flex-1">
+                        <input type="text" class="w-full border-none outline-none text-gray-400 text-xs sm:text-sm" placeholder="I have a Job, I can post to support Jobless !">
+                        <div class="text-blue-500 text-xs flex items-center gap-1 mt-1 cursor-pointer">
+                            <i class="fas fa-users"></i> 
+                            <select name="" id="">
+                                <option value="Your Followers">Your Followers</option>
+                                <option value="Your Followers">Byiringiro Elise</option>
+                                <option value="Your Followers">Just kevin</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="flex flex-wrap justify-end items-center gap-2 mt-3 sm:mt-4">
+                    <div class="flex items-center gap-1 text-blue-500 text-xs sm:text-sm">
+                        <i class="fas fa-wallet"></i> 
+                        <select name="" id="">
+                            <option value="US$ 99.99">US$ 99.99</option>
+                            <option value="US$ 99.99">US$ 32.9</option>
+                            <option value="US$ 99.99">US$ 19.20</option>
+                        </select>
+                    </div>
+                    <button class="btn-gradient text-white px-6 sm:px-8 py-1.5 sm:py-2 rounded-full font-bold cursor-pointer text-xs sm:text-sm">Post</button>
+                    <div class="text-blue-500 text-xs sm:text-sm">16,000 Jobless</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-5">
+                <div class="bg-white rounded-lg p-4 sm:p-5 text-center shadow">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-2.5 rounded-full bg-yellow-200 flex items-center justify-center">
+                        <img src="https://images.africanfinancials.com/17e10799-ug-airtel-logo.png" alt=""><!-- <i class="fas fa-broadcast-tower text-red-600 text-2xl sm:text-3xl"></i> -->
+                    </div>
+                    <div class="font-bold mb-1 flex items-center justify-center gap-1 text-sm sm:text-base">
+                        Airtel Ltd. <i class="fas fa-check-circle text-blue-500 text-xs"></i>
+                    </div>
+                    <div class="text-xs text-gray-600 mb-2">Network & System Administrator</div>
+                    <div class="text-xs text-gray-400 mb-3 sm:mb-4">Airtel Ltd is in Muhanga</div>
+                    <button class="btn-gradient text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-bold cursor-pointer w-full sm:w-auto">Urgent Hiring !</button>
+                </div>
+                <div class="bg-white rounded-lg p-4 sm:p-5 text-center shadow">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-2.5 rounded-full bg-gray-300 flex items-center justify-center">
+                        <img src="https://img.freepik.com/premium-vector/simple-eagle-icon-logo-mascot-emblem_982369-72.jpg" alt=""><!-- <i class="fas fa-microphone text-gray-800 text-2xl sm:text-3xl"></i> -->
+                    </div>
+                    <div class="font-bold mb-1 flex items-center justify-center gap-1 text-sm sm:text-base">
+                        Twapela <i class="fas fa-check-circle text-blue-500 text-xs"></i>
+                    </div>
+                    <div class="text-xs text-gray-600 mb-2">Machine Learning Engineer</div>
+                    <div class="text-xs text-gray-400 mb-3 sm:mb-4">Twapela is in Muhamma...</div>
+                    <button class="btn-gradient text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-bold cursor-pointer w-full sm:w-auto">Urgent Hiring !</button>
+                </div>
+                <div class="bg-white rounded-lg p-4 sm:p-5 text-center shadow">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-2 sm:mb-2.5 rounded-full bg-red-200 flex items-center justify-center">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D0BAQHNeH2tvMlAXw/company-logo_200_200/B4DZWeLYMYHkAI-/0/1742115538761/mpuza_logo?e=2147483647&v=beta&t=qiRi-rNEFqJSoFmKs7VVwUbYgnhA8tDEuqjgGiMTKbI" alt=""><!-- <i class="fas fa-shopping-bag text-red-600 text-2xl sm:text-3xl"></i> -->
+                    </div>
+                    <div class="font-bold mb-1 flex items-center justify-center gap-1 text-sm sm:text-base">
+                        Mpuza, Inc. <i class="fas fa-check-circle text-blue-500 text-xs"></i>
+                    </div>
+                    <div class="text-xs text-gray-600 mb-2">Legal Officer</div>
+                    <div class="text-xs text-gray-400 mb-3 sm:mb-4">Mpuza is located just...</div>
+                    <button class="btn-gradient text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-bold cursor-pointer w-full sm:w-auto">Urgent Hiring !</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-4 sm:p-5 mb-4">
+                <div class="flex justify-between">
+                <div class="h-1 rounded mb-4 sm:mb-5 bg-blue-500 p-2 w-40"></div>
+                 <div class="text-blue-500 text-xs cursor-pointer flex items-center gap-1">
+                    <i class="fas fa-user-plus"></i>Follow
+                    </div>
+
+                </div>
+                <div class="flex gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <!-- <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-circle text-blue-500 text-2xl sm:text-3xl"></i>
+                    </div> -->
+                    <div class="flex">
+                        <div class="font-bold flex items-center gap-2 text-base sm:text-lg mb-1">
+                            <i class="fas fa-circle text-blue-500 text-xs"></i> 3 Vacant Positions
+                        </div>                       
+                    </div>
+                </div>
+                <div class="flex gap-3 sm:gap-5 mb-3 sm:mb-4">
+                    <div class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-circle text-blue-500"></i>
+                        <span>1 Year of Experience</span>
+                    </div>
+                </div>
+                <div class="flex gap-3 sm:gap-5 justify-end mb-3 sm:mb-4">
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">04</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Days</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">08</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Hours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">44</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Minutes</div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-gray-200 justify-content: justify-end">
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="fas fa-heart text-red-600 text-base"></i> Like
+                    </button>
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="far fa-comment text-base"></i> Comment
+                    </button>
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="fas fa-share text-base"></i> Share
+                    </button>
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="far fa-star text-base"></i> Favourite
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-4 sm:p-5 mb-4">
+                <div class="flex gap-3 sm:gap-4 mb-3 sm:mb-4 ">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-leaf text-green-600 text-2xl sm:text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-bold flex items-center gap-2 mb-1 text-sm sm:text-base">
+                            One Acre Fund <i class="fas fa-check-circle text-blue-500 text-xs"></i>
+                        </div>
+                        <div class="text-blue-500 text-xs cursor-pointer justify-end flex items-center inset-1 gap-1">
+                            <i class="fas fa-user-plus"></i> Follow
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-2 mb-3 sm:mb-4">
+                    <div class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-circle text-blue-500"></i>
+                        <span>3 Vacant Positions</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-circle text-blue-500"></i>
+                        <span>1 Year of Experience</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs sm:text-sm">
+                        <i class="fas fa-circle text-blue-500"></i>
+                        <span>Bachelor Degree in Software Engineering</span>
+                    </div>
+                </div>
+                <div class="flex gap-3 sm:gap-5 justify-end mb-3 sm:mb-4">
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">04</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Days</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">08</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Hours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">44</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Minutes</div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-gray-200 justify-content: justify-end ">
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="fas fa-heart text-red-600 text-base"></i> Like
+                    </button>
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="far fa-comment text-base"></i> Comment
+                    </button>
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="fas fa-share text-base"></i> Share
+                    </button>
+                    <button class="bg-transparent border-none cursor-pointer flex items-center gap-1 text-xs sm:text-sm text-gray-600">
+                        <i class="far fa-star text-base"></i> Favourite
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="w-full lg:w-96 flex-shrink-0 lg:overflow-y-auto lg:h-screen custom-scrollbar lg:pr-2" style="max-height: calc(100vh - 80px);">
+            <!-- <div class="bg-white rounded-lg overflow-hidden mb-4 sm:mb-5">
+                <div class="featured-gradient text-white py-2 sm:py-2.5 px-3 sm:px-4 flex items-center gap-2 font-bold text-sm sm:text-base">
+                    <i class="fas fa-star"></i> Favourited Jobs
+                </div>
+                <div class="mb-3 sm:mb-4 text-center text-gray-600 text-xs px-3 sm:px-4 pt-3 sm:pt-4">
+                    Click on interested Job Favourite icon<br>To save it here to enable quick access !
+                </div>
+                <div class="text-center px-4 sm:px-5 pb-4 sm:pb-5">
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-3 sm:mb-4 overflow-hidden border-4 border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop" alt="Featured User" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-16 sm:w-20 mx-auto mb-3 sm:mb-4">
+                        <img src="https://img.icons8.com/color/96/crown.png" alt="Crown Badge" class="w-full h-auto">
+                    </div>
+                    <div class="italic text-red-600 mb-3 sm:mb-4 text-xs sm:text-sm">Be celebrate you financially !</div>
+                    <div class="mt-3 sm:mt-4">
+                        <img src="https://via.placeholder.com/320x100/9b59b6/ffffff?text=Let+us+crown+your+dream" alt="Banner" class="w-full h-auto rounded">
+                    </div>
+                </div>
+            </div> -->
+            <div class="flex bg-white rounded">
+                <div class="flex flex-col m-2 justify-center items-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNpxV8tnKssuvBlGNnTvFpiH2Orciq9842rw&s" class="rounded" alt="">
+                    <i class="text-sm text-red-300">Happy celebrity</i>
+                </div>
+                <div class="m-1">
+                    <div>
+                        <div class="bg-blue-500 flex rounded space-x-2"><span class="text-xl m-1 text-white"><i class="fas fa-star text-white"></i> favourite jobs</span></div>
+                        <div>
+                            <span class="text-sm">click on interested job <strong>Favourite icon</strong> to save it here, enable quick access</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-center flex-col items-center"><img src="https://cdn-icons-png.flaticon.com/256/6738/6738558.png" class=" h-20 w-40" alt=""><span>let us revive your dreams</span></div>
+                    </div>
+                </div>
+            </div>
+                <div class="bg-white rounded-md mt-2">
+                   <div class="flex justify-between items-start p-3 sm:p-4 border-b border-gray-200">
+                    <div class="flex gap-2 sm:gap-3 flex-1">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <img src="https://images.africanfinancials.com/17e10799-ug-airtel-logo.png" alt=""><!-- <i class="fas fa-signal text-white text-xl sm:text-2xl"></i> -->
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="font-bold mb-1 text-xs sm:text-sm flex items-center gap-1">
+                                <i class="fas fa-signal text-red-600 text-xs"></i> Airtel Rwanda
+                            </div>
+                            <div class="text-xs text-gray-600 leading-tight">
+                                <strong>Network & System</strong> Administrator [Full-Time]<br>
+                                Telecommunication
+                            </div>
+                        </div>
+                    </div>
+                    <button class="bg-transparent border-none text-xl sm:text-2xl cursor-pointer text-gray-400 p-0 w-6 h-6 leading-none flex-shrink-0">×</button>
+                </div>
+                
+
+                <div class="flex gap-4 sm:gap-5 justify-center py-4 sm:py-5">
+                    <div class="text-center py-3 sm:py-4 relative bottom-2">
+                    <i class="fas fa-star text-gray-700 text-2xl sm:text-3xl"></i>
+                </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">04</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Days</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">08</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Hours</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-lg sm:text-xl font-bold text-red-600">44</div>
+                        <div class="text-xs text-gray-600 mt-0.5">Minutes</div>
+                    </div>
+                </div> 
+                </div>
+                
+            <div class="bg-white rounded-lg mt-3 overflow-hidden">               
+
+                <div class="p-4 sm:p-5">
+                    <div class="mb-4 sm:mb-5">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Job Description</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-2">This job will be based in Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+
+                    <div class="mb-4 sm:mb-5">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Number of Positions</h3>
+                        <ul class="list-none pl-0">
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4 sm:mb-5">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Direct Supervisor</h3>
+                        <ul class="list-none pl-0">
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4 sm:mb-5">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Duties and Responsibilities</h3>
+                        <ul class="list-none pl-0">
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4 sm:mb-5">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Qualifications</h3>
+                        <ul class="list-none pl-0">
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-4 sm:mb-5">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Experience</h3>
+                        <ul class="list-none pl-0">
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-0">
+                        <h3 class="text-xs sm:text-sm font-bold mb-2 sm:mb-2.5">Certificate</h3>
+                        <ul class="list-none pl-0">
+                            <li class="py-1 text-xs text-gray-600 flex items-start gap-2 sm:gap-2.5 leading-snug">
+                                <span class="text-gray-600 font-normal mt-0.5 flex-shrink-0">⊙</span>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
